@@ -38,12 +38,13 @@ data = {
 }
 
 df = pd.DataFrame(data)
-print(df.shape)
-print(df.info()) 
+# print(df.shape)
+# print(df.info()) 
 
 
 # 2. Filter the DataFrame to show only orders where total is above 200. Print the result.
 
+print(df[df['total'] > 200])
 
 # 3. Add a new column called tax that is 8% of total. Print the updated DataFrame.
 # 4. Sort the DataFrame by total descending and print it.
