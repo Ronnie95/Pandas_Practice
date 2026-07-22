@@ -47,4 +47,7 @@ df = pd.DataFrame(data)
 print(df[df['total'] > 200])
 
 # 3. Add a new column called tax that is 8% of total. Print the updated DataFrame.
+df['tax'] = df['total'] * 0.08
+
+print(df)
 # 4. Sort the DataFrame by total descending and print it.
