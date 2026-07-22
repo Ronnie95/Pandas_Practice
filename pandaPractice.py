@@ -51,3 +51,8 @@ df['tax'] = df['total'] * 0.08
 
 print(df)
 # 4. Sort the DataFrame by total descending and print it.
+
+# Sort by total in descending order
+df_sorted = df.sort_values(by='total', ascending=False)
+
+print(df_sorted)
