@@ -56,3 +56,15 @@ print(df)
 df_sorted = df.sort_values(by='total', ascending=False)
 
 print(df_sorted)
+
+
+# Use the DataFrame you built in Lesson 1 (orders with 5 rows):
+
+
+# Write it to a CSV file, read it back, and print the dtypes. Do the types look the same as your original DataFrame?
+
+# Write it to a Parquet file, read it back, and print the dtypes. How do these compare to the CSV dtypes?
+
+# Write it to JSON using orient='records', then open the JSON file in a text editor and paste what it looks like here.
+
+# Stretch: Read the CSV back but only load the customer and total columns using usecols. Print the result.
