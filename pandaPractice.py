@@ -44,24 +44,29 @@ df = pd.DataFrame(data)
 
 # 2. Filter the DataFrame to show only orders where total is above 200. Print the result.
 
-print(df[df['total'] > 200])
+# print(df[df['total'] > 200])
 
 # 3. Add a new column called tax that is 8% of total. Print the updated DataFrame.
-df['tax'] = df['total'] * 0.08
+# df['tax'] = df['total'] * 0.08
 
-print(df)
+# print(df)
 # 4. Sort the DataFrame by total descending and print it.
 
 # Sort by total in descending order
-df_sorted = df.sort_values(by='total', ascending=False)
+# df_sorted = df.sort_values(by='total', ascending=False)
 
-print(df_sorted)
+# print(df_sorted)
 
 
 # Use the DataFrame you built in Lesson 1 (orders with 5 rows):
 
 
 # Write it to a CSV file, read it back, and print the dtypes. Do the types look the same as your original DataFrame?
+
+df.to_csv('output.csv', index=False)
+df_csv = pd.read_csv('output.csv')
+
+print(df_csv.dtypes)
 
 # Write it to a Parquet file, read it back, and print the dtypes. How do these compare to the CSV dtypes?
 
