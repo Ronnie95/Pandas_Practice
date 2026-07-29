@@ -79,4 +79,8 @@ df = pd.DataFrame(data)
 df.to_json('orders.json', orient='records', indent=2)
 with open('orders.json', 'r') as f:
     print(f.read())
+
 # Stretch: Read the CSV back but only load the customer and total columns using usecols. Print the result.
+
+df_cols = pd.read_csv('output.csv', usecols=['first_name', 'total'])
+print(df_cols)
