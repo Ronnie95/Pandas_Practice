@@ -70,9 +70,13 @@ df = pd.DataFrame(data)
 
 # Write it to a Parquet file, read it back, and print the dtypes. How do these compare to the CSV dtypes?
 
-df.to_parquet('output.parquet')
-df_parquet = pd.read_parquet('output.parquet')
-print(df_parquet)
+# df.to_parquet('output.parquet')
+# df_parquet = pd.read_parquet('output.parquet')
+# print(df_parquet.dtypes)
+
 # Write it to JSON using orient='records', then open the JSON file in a text editor and paste what it looks like here.
 
+df.to_json('orders.json', orient='records', indent=2)
+with open('orders.json', 'r') as f:
+    print(f.read())
 # Stretch: Read the CSV back but only load the customer and total columns using usecols. Print the result.
