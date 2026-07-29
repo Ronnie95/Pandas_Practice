@@ -63,13 +63,16 @@ df = pd.DataFrame(data)
 
 # Write it to a CSV file, read it back, and print the dtypes. Do the types look the same as your original DataFrame?
 
-df.to_csv('output.csv', index=False)
-df_csv = pd.read_csv('output.csv')
+# df.to_csv('output.csv', index=False)
+# df_csv = pd.read_csv('output.csv')
 
-print(df_csv.dtypes)
+# print(df_csv.dtypes)
 
 # Write it to a Parquet file, read it back, and print the dtypes. How do these compare to the CSV dtypes?
 
+df.to_parquet('output.parquet')
+df_parquet = pd.read_parquet('output.parquet')
+print(df_parquet)
 # Write it to JSON using orient='records', then open the JSON file in a text editor and paste what it looks like here.
 
 # Stretch: Read the CSV back but only load the customer and total columns using usecols. Print the result.
