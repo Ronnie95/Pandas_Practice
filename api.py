@@ -15,3 +15,10 @@ data = response.json()
 df = pd.DataFrame(data)
 print(df.shape)
 print(df.head())
+# Get posts by a specific user
+response = requests.get(
+    'https://jsonplaceholder.typicode.com/posts',
+    params={'userId': 1}
+)
+data = response.json()
+print(len(data))  # how many posts for user 1?
