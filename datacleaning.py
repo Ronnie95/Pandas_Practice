@@ -17,8 +17,10 @@ print(df.isnull().sum())      # count nulls per column
 df['total']    = df['total'].astype(float)
 df = df[df['total'] > 0]
 
-
 # Standardize customer and city to Title Case with no leading/trailing spaces.
+
+df['customer'] = df['customer'].str.strip().str.title()
+df['city'] = df['city'].str.strip().str.title()
 # Remove duplicate rows.
 # Fill the null customer with 'Unknown' and null city with 'Unknown'.
 # Add four assert statements to validate: no nulls in order_id, all totals positive, no duplicate order_ids, and both customer and city columns exist.
