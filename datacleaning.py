@@ -12,8 +12,12 @@ df = pd.DataFrame({
 # Print the null count per column before cleaning.
 print(df.isnull().sum())      # count nulls per column
 
-
 # Fix the total column — cast to float, then remove any rows where total is negative or zero.
+
+df['total']    = df['total'].astype(float)
+df = df[df['total'] > 0]
+
+
 # Standardize customer and city to Title Case with no leading/trailing spaces.
 # Remove duplicate rows.
 # Fill the null customer with 'Unknown' and null city with 'Unknown'.
