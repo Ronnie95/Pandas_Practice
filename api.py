@@ -47,13 +47,22 @@ import pandas as pd
 
 # Hit https://jsonplaceholder.typicode.com/posts and load the response into a DataFrame. Print the shape and the first 3 rows.
 
-response = requests.get('https://jsonplaceholder.typicode.com/posts')
-data = response.json()
-df = pd.DataFrame(data)
-print(df.shape)
-print(df.head(3))
+# response = requests.get('https://jsonplaceholder.typicode.com/posts')
+# data = response.json()
+# df = pd.DataFrame(data)
+# print(df.shape)
+# print(df.head(3))
 
 
 # Use query params to fetch only posts where userId=3. How many posts does user 3 have?
+
+# Get posts by a specific user
+response = requests.get(
+    'https://jsonplaceholder.typicode.com/posts',
+    params={'userId': 3}
+)
+data = response.json()
+print(len(data)) 
+
 # Hit https://jsonplaceholder.typicode.com/users and load it into a DataFrame. Print the column names — what data is available?
 # Stretch: Fetch all posts using pagination (_page and _limit=5). Collect all pages into one DataFrame and print the final shape.
