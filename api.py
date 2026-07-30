@@ -57,12 +57,18 @@ import pandas as pd
 # Use query params to fetch only posts where userId=3. How many posts does user 3 have?
 
 # Get posts by a specific user
-response = requests.get(
-    'https://jsonplaceholder.typicode.com/posts',
-    params={'userId': 3}
-)
-data = response.json()
-print(len(data)) 
+# response = requests.get(
+#     'https://jsonplaceholder.typicode.com/posts',
+#     params={'userId': 3}
+# )
+# data = response.json()
+# print(len(data)) 
 
 # Hit https://jsonplaceholder.typicode.com/users and load it into a DataFrame. Print the column names — what data is available?
+
+response = requests.get('https://jsonplaceholder.typicode.com/users')
+data = response.json()
+df_users = pd.DataFrame(data)
+print(df_users.columns.tolist())
+
 # Stretch: Fetch all posts using pagination (_page and _limit=5). Collect all pages into one DataFrame and print the final shape.
