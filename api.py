@@ -22,3 +22,24 @@ response = requests.get(
 )
 data = response.json()
 print(len(data))  # how many posts for user 1?
+
+
+all_posts = []
+page = 1
+
+while True:
+    response = requests.get(
+        'https://jsonplaceholder.typicode.com/posts',
+        params={'_page': page, '_limit': 10}
+    )
+    data = response.json()
+
+    if not data:          # empty page = we're done
+        break
+
+    all_posts.extend(data)
+    page += 1
+
+print(f'Total posts collected: {len(all_posts)}')
+df = pd.DataFrame(all_posts)
+print(df.shape)
