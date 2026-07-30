@@ -66,9 +66,29 @@ import pandas as pd
 
 # Hit https://jsonplaceholder.typicode.com/users and load it into a DataFrame. Print the column names — what data is available?
 
-response = requests.get('https://jsonplaceholder.typicode.com/users')
-data = response.json()
-df_users = pd.DataFrame(data)
-print(df_users.columns.tolist())
+# response = requests.get('https://jsonplaceholder.typicode.com/users')
+# data = response.json()
+# df_users = pd.DataFrame(data)
+# print(df_users.columns.tolist())
 
 # Stretch: Fetch all posts using pagination (_page and _limit=5). Collect all pages into one DataFrame and print the final shape.
+
+all_posts = []
+page = 1
+
+while True:
+    response = requests.get(
+        'https://jsonplaceholder.typicode.com/posts',
+        params={'_page': page, '_limit': 5}
+    )
+    data = response.json()
+
+    if not data:          # empty page = we're done
+        break
+
+    all_posts.extend(data)
+    page += 1
+
+print(f'Total posts collected: {len(all_posts)}')
+df = pd.DataFrame(all_posts)
+print(df.shape)
