@@ -20,6 +20,16 @@ records = [
     {'order_id': 5, 'total': '300.00'},
 ]
 
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('pipeline.log'),
+        logging.StreamHandler()          # also print to terminal
+    ]
+)
+
 # What log level is used when a record fails type casting?
 
 # What log level is used when a record has a negative total?
@@ -27,3 +37,4 @@ records = [
 # How many INFO messages appear in the output?
 
 # Add one more logger.info() call before the for loop and one after — what would you put there that's useful?
+
