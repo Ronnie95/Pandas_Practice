@@ -1,40 +1,47 @@
+# pipeline.py
+import os
 import logging
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-
-logging.debug("Detailed info for debugging")
-logging.info("Pipeline started")
-logging.warning("Missing city value — filling with Unknown")
-logging.error("Failed to cast total to float")
-logging.critical("Database connection lost — pipeline cannot continue")
-
-
-records = [
-    {'order_id': 1, 'total': '150.00'},
-    {'order_id': 2, 'total': 'INVALID'},
-    {'order_id': 3, 'total': '89.99'},
-    {'order_id': 4, 'total': '-50.00'},
-    {'order_id': 5, 'total': '300.00'},
-]
-
+import requests
+import pandas as pd
+from config import API_URL, OUTPUT_PATH
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('pipeline.log'),
-        logging.StreamHandler()          # also print to terminal
-    ]
+    format='%(asctime)s - %(levelname)s - %(message)s'
 )
+logger = logging.getLogger('todos_pipeline')
 
-# What log level is used when a record fails type casting?
 
-# What log level is used when a record has a negative total?
+def fetch_data(url):
+    logger.info(f"Fetching from {url}")
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()
+    return response.json()
 
-# How many INFO messages appear in the output?
 
-# Add one more logger.info() call before the for loop and one after — what would you put there that's useful?
+def clean_data(records):
+    logger.info(f"Cleaning {len(records)} records")
+    df = pd.DataFrame(records)
+    df = df[df['completed'] == True]
+    return df
 
+
+def save_data(df, path):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    df.to_parquet(path)
+    logger.info(f"Saved {len(df)} records to {path}")
+
+
+def run():
+    try:
+        records = fetch_data(API_URL)
+        df = clean_data(records)
+        save_data(df, OUTPUT_PATH)
+        logger.info("Pipeline complete")
+    except Exception as e:
+        logger.critical(f"Pipeline failed: {e}")
+        raise
+
+
+if __name__ == "__main__":
+    run()
